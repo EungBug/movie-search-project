@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { searchByMovie } from './MovieApi'
+import { searchByMovie } from '~/MovieApi'
+import '~/App.css'
 
 export default function App() {
   const [movies, setMovies] = useState([])
@@ -18,11 +19,25 @@ export default function App() {
 
   return (
     <>
+      <Header />
       <ul>
         {movies?.map(movie => (
           <li key={movie.imdbID}>{movie.Title}</li>
         ))}
       </ul>
     </>
+  )
+}
+
+// Header Component
+function Header() {
+  return (
+    <div className="header">
+      <h1>
+        <a href="/">
+          Movie.<span>Bug</span>🐞
+        </a>
+      </h1>
+    </div>
   )
 }

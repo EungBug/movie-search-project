@@ -28,16 +28,3 @@ export default function App() {
     </>
   )
 }
-
-// Header Component
-function Header() {
-  return (
-    <div className="header">
-      <h1>
-        <a href="/">
-          Movie.<span>Bug</span>🐞
-        </a>
-      </h1>
-    </div>
-  )
-}

@@ -1,12 +1,18 @@
 :root {
   --background: #1c1a29;
   --main: #6c61af;
-  --secondary: 2F2C44;
+  --secondary: #2f2c44;
   --white: #fff;
   --black: #000;
+  --font: #f1f1f1;
+  --hint: rgba(255, 255, 255, 0.2);
+  --button-active: #6c61af80;
 }
 
+html,
 body {
+  width: 100%;
+  height: 100%;
   font-size: 16px;
   font-family: 'Poppins', sans-serif;
   color: var(--white);
@@ -16,4 +22,9 @@ body {
 a {
   color: var(--white);
   text-decoration: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
 }

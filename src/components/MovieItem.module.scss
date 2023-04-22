@@ -36,3 +36,18 @@
     text-overflow: ellipsis;
   }
 }
+
+.movie-item:hover::after {
+  content: '자세히보기';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 22px;
+  cursor: pointer;
+}

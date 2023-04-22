@@ -10,23 +10,32 @@ export default function Home() {
   const [movies, setMovies] = useState([])
   const [totalResults, setTotalResults] = useState('')
   const [isSearching, setIsSearching] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const getMovies = async () => {
+    setIsLoading(true)
     try {
       const res = await searchByMovie(searchKeyword)
-      console.log(res)
       if (res) {
         setMovies(res.Search)
         setTotalResults(res.totalResults)
+
+        // Loading Spinner를 좀 더 보여주기 위해..
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 1000)
       }
     } catch (e) {
       console.log(e)
+      setIsLoading(false)
     }
   }
 
   const changeSearchKeyword = keyword => {
-    console.log(keyword)
     setSearchKeyword(keyword)
+    if (keyword.trim() === '') {
+      setIsSearching(false)
+    }
   }
 
   const searchButtonClick = () => {
@@ -52,6 +61,7 @@ export default function Home() {
           <MovieResult
             totalResults={totalResults}
             movies={movies}
+            isLoading={isLoading}
           />
         ) : (
           ''
@@ -61,16 +71,29 @@ export default function Home() {
   )
 }
 
-function MovieResult({ totalResults, movies }) {
+function MovieResult({ totalResults, movies, isLoading }) {
   return (
     <div className={styles.result}>
-      <p>{`검색결과 : 총 ${totalResults}건`}</p>
-      <ul>
-        {movies?.map(movie => {
-          console.log(movie)
-          return <MovieItem movie={movie} />
-        })}
-      </ul>
+      {isLoading ? (
+        <span
+          className="fa-sharp fa-solid fa-spinner fa-spin-pulse"
+          style={{
+            color: '#4548a5',
+            fontSize: '50px',
+            left: '-50%',
+            marginLeft: '50%'
+          }}></span>
+      ) : (
+        <>
+          <p>{`검색결과 : 총 ${totalResults}건`}</p>
+          <ul>
+            {movies?.map(movie => {
+              console.log(movie)
+              return <MovieItem movie={movie} />
+            })}
+          </ul>
+        </>
+      )}
     </div>
   )
 }

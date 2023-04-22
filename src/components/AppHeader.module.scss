@@ -31,6 +31,8 @@
     }
 
     li:hover {
+      color: var(--hover);
+      text-shadow: 2px 2px 4px rgba($color: #fff, $alpha: 0.4);
     }
   }
 }

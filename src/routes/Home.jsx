@@ -9,22 +9,38 @@ import styles from './Home.module.scss'
 export default function Home() {
   const [searchKeyword, setSearchKeyword] = useState('')
   const [movies, setMovies] = useState([])
+  const [page, setPage] = useState(1)
+  const [pageMax, setPageMax] = useState(1)
   const [totalResults, setTotalResults] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  useEffect(() => {
+    // 30개씩 호출 구현
+    getMovies()
+  }, [page])
+
   const getMovies = async () => {
-    setIsLoading(true)
+    if (page % 3 === 1) {
+      // 처음 호출 한번만 로딩을 돌리고
+      setIsLoading(true)
+    }
+
     try {
-      const res = await searchByMovie(searchKeyword)
+      const res = await searchByMovie(searchKeyword, page)
       if (res) {
-        setMovies(res.Search)
+        setMovies([...movies, ...res.Search])
         setTotalResults(res.totalResults)
 
-        // Loading Spinner를 좀 더 보여주기 위해..
-        setTimeout(() => {
+        const pageMax = Math.ceil(Number(res.totalResults) / 30)
+        setPageMax(pageMax)
+
+        //30개씩 조회 완료 시 로딩 종료
+        if (page % 3 === 0 || page === pageMax) {
           setIsLoading(false)
-        }, 1000)
+          return
+        }
+        setPage(page + 1)
       }
     } catch (e) {
       console.log(e)
@@ -36,13 +52,16 @@ export default function Home() {
     setSearchKeyword(keyword)
     if (keyword.trim() === '') {
       setIsSearching(false)
+      setMovies([])
     }
   }
 
   const searchButtonClick = () => {
     if (searchKeyword.trim()) {
       setIsSearching(true)
-      getMovies()
+      setMovies([])
+      setPage(1)
+      getMovies(1)
     }
   }
 
@@ -68,33 +87,6 @@ export default function Home() {
           ''
         )}
       </div>
-    </div>
-  )
-}
-
-function MovieResult({ totalResults, movies, isLoading }) {
-  return (
-    <div className={styles.result}>
-      {isLoading ? (
-        <span
-          className="fa-sharp fa-solid fa-spinner fa-spin-pulse"
-          style={{
-            color: '#4548a5',
-            fontSize: '50px',
-            left: '-50%',
-            marginLeft: '50%'
-          }}></span>
-      ) : (
-        <>
-          <p>{`검색결과 : 총 ${totalResults}건`}</p>
-          <ul>
-            {movies?.map(movie => {
-              console.log(movie)
-              return <MovieItem movie={movie} />
-            })}
-          </ul>
-        </>
-      )}
     </div>
   )
 }

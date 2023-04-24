@@ -18,7 +18,6 @@ export default function MovieList({ movies, totalResults, isLoading }) {
           <p className={styles.total}>{`검색결과 : 총 ${totalResults}건`}</p>
           <ul>
             {movies?.map(movie => {
-              console.log(movie)
               return <MovieItem movie={movie} />
             })}
           </ul>

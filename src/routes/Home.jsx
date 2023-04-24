@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { searchByMovie } from '~/MovieApi'
 import AppHeader from '~/components/AppHeader'
 import SearchBar from '~/components/SearchBar'
+import MovieList from '~/components/MovieList'
 import MovieItem from '~/components/MovieItem'
 import styles from './Home.module.scss'
 
@@ -58,7 +59,7 @@ export default function Home() {
         />
 
         {isSearching && movies ? (
-          <MovieResult
+          <MovieList
             totalResults={totalResults}
             movies={movies}
             isLoading={isLoading}

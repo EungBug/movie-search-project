@@ -13,9 +13,10 @@ export default function SearchBar({
     searchRef.current.addEventListener('keydown', event => {
       if (event.key === 'Enter') {
         {
+          onChange(event.target.value)
           onSearchClick()
         }
-        event.target.blur() // 포커스 해제
+        if (isSearching) event.target.blur() // 포커스 해제
       }
     })
   }, [])

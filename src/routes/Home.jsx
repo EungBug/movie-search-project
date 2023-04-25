@@ -15,6 +15,7 @@ export default function Home() {
   const [isSearching, setIsSearching] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
+  const [loadMore, setLoadMore] = useState(false) // 무한 스크롤 로딩중인지
   const [errorMessage, setErrorMessage] = useState('')
 
   // 무한스크롤
@@ -70,6 +71,7 @@ export default function Home() {
         if (page % 3 === 0 || page === pageMax) {
           setIsLoading(false)
           preventRef.current = true
+          setLoadMore(false)
           return
         }
 
@@ -119,6 +121,7 @@ export default function Home() {
     if (!endRef.current && target.isIntersecting && preventRef.current) {
       console.log('핸들러 실행')
       preventRef.current = false
+      setLoadMore(true)
       setPage(prev => prev + 1) //페이지 값 증가
     }
   }
@@ -152,6 +155,7 @@ export default function Home() {
               totalResults={totalResults}
               movies={movies}
               isLoading={isLoading && page <= 3}
+              loadMore={loadMore}
             />
             {/* 하단을 감지할 옵저버 */}
             <div

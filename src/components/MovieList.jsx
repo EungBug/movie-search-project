@@ -1,7 +1,15 @@
 import MovieItem from './MovieItem'
+import SkeletonItem from './SkeletonItem'
 import styles from './MovieList.module.scss'
 
-export default function MovieList({ movies = [], totalResults, isLoading }) {
+export default function MovieList({
+  movies = [],
+  totalResults,
+  isLoading,
+  loadMore
+}) {
+  const skeletonItems = new Array(20).fill('')
+
   return (
     <div className={styles.result}>
       {isLoading ? (
@@ -20,9 +28,15 @@ export default function MovieList({ movies = [], totalResults, isLoading }) {
           }건`}</p>
           {movies.length !== 0 ? (
             <ul>
-              {movies.map(movie => {
+              {movies?.map(movie => {
                 return <MovieItem movie={movie} />
               })}
+
+              {loadMore
+                ? skeletonItems.map(() => {
+                    return <SkeletonItem />
+                  })
+                : ''}
             </ul>
           ) : (
             <div className={styles.message}>🎬 검색 결과가 없습니다.</div>

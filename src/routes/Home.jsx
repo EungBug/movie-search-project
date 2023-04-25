@@ -115,6 +115,13 @@ export default function Home() {
     }
   }
 
+  const enterKeydownHandler = event => {
+    if (event.key === 'Enter') {
+      searchButtonClick()
+      event.target.blur()
+    }
+  }
+
   const obsHandler = entries => {
     const target = entries[0]
     //옵저버 중복 실행 방지를 위한 Flag들
@@ -127,7 +134,7 @@ export default function Home() {
   }
 
   const searchButtonClick = () => {
-    if (searchKeyword.trim()) {
+    if (searchKeyword.trim() !== '') {
       preventRef.current = false
       endRef.current = false
       setPage(1)
@@ -147,6 +154,7 @@ export default function Home() {
           onChange={changeSearchKeyword}
           onSearchClick={searchButtonClick}
           isSearching={isSearching}
+          onKeydown={enterKeydownHandler}
         />
 
         {isSearching && movies && !isError ? (

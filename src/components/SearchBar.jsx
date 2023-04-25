@@ -9,6 +9,17 @@ export default function SearchBar({
 }) {
   const searchRef = useRef(null)
 
+  useEffect(() => {
+    searchRef.current.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        {
+          onSearchClick()
+        }
+        event.target.blur() // 포커스 해제
+      }
+    })
+  }, [])
+
   return (
     <div
       className={`${styles['search-bar']} ${

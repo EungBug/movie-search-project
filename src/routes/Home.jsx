@@ -1,9 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { searchByMovie } from '~/MovieApi'
 import AppHeader from '~/components/AppHeader'
 import SearchBar from '~/components/SearchBar'
 import MovieList from '~/components/MovieList'
-import MovieItem from '~/components/MovieItem'
+import ErrorPopup from '../components/ErrorPopup'
 import styles from './Home.module.scss'
 
 export default function Home() {
@@ -13,11 +14,16 @@ export default function Home() {
   const [totalResults, setTotalResults] = useState('')
   const [isSearching, setIsSearching] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   // 무한스크롤
   const obsRef = useRef(null)
   const preventRef = useRef(false)
   const endRef = useRef(false)
+
+  // 네트워크 에러 시 메인으로 이동
+  const navigate = useNavigate()
 
   useEffect(() => {
     //옵저버 생성
@@ -35,6 +41,7 @@ export default function Home() {
 
   useEffect(() => {
     // 30개씩 호출 구현
+    if (!searchKeyword.trim()) return
     getMovies()
   }, [page])
 
@@ -44,13 +51,14 @@ export default function Home() {
       setIsLoading(true)
     }
 
-    try {
-      const res = await searchByMovie(searchKeyword, page)
+    const res = await searchByMovie(searchKeyword, page, errorHandler)
+    console.log(res)
+    if (res.Response === 'True') {
       if (res.Search) {
         setMovies([...movies, ...res.Search])
         setTotalResults(res.totalResults)
 
-        const pageMax = Math.ceil(Number(res.totalResults) / 30)
+        const pageMax = Math.ceil(Number(res.totalResults) / 10)
         console.log('api 호출 =====', page)
 
         // 더이상 호출할 데이터 없음
@@ -67,17 +75,41 @@ export default function Home() {
 
         setPage(page + 1)
       }
-    } catch (e) {
-      console.log(e)
+    } else {
       setIsLoading(false)
     }
+  }
+
+  const errorHandler = error => {
+    console.log(error)
+    setIsLoading(false)
+    if (error.code === 'ERR_NETWORK') {
+      setErrorMessage(
+        '🚨 네트워크 오류가 발생했습니다.\n잠시후 다시 시도해주세요!!'
+      )
+    } else {
+      setErrorMessage(
+        '❌ 알 수 없는 오류가 발생했습니다.\n잠시 후 다시 시도해주세요!!'
+      )
+    }
+    setIsError(true)
+  }
+
+  function goToHome() {
+    navigate('/')
+    navigate(0)
+  }
+
+  const clearSearching = () => {
+    setIsSearching(false)
+    setMovies([])
+    setIsError(false)
   }
 
   const changeSearchKeyword = keyword => {
     setSearchKeyword(keyword)
     if (keyword.trim() === '') {
-      setIsSearching(false)
-      setMovies([])
+      clearSearching()
     }
   }
 
@@ -114,7 +146,7 @@ export default function Home() {
           isSearching={isSearching}
         />
 
-        {isSearching && movies ? (
+        {isSearching && movies && !isError ? (
           <>
             <MovieList
               totalResults={totalResults}
@@ -126,6 +158,15 @@ export default function Home() {
               className=""
               ref={obsRef}></div>
           </>
+        ) : (
+          ''
+        )}
+
+        {isError && errorMessage ? (
+          <ErrorPopup
+            message={errorMessage}
+            confirmCb={goToHome}
+          />
         ) : (
           ''
         )}

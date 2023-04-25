@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useRef, useEffect } from 'react'
 import styles from './AppHeader.module.scss'
-
 export default function AppHeader() {
   const navigate = useNavigate()
   const homeRef = useRef(null)
@@ -11,7 +10,9 @@ export default function AppHeader() {
   }, [])
 
   function goToHome() {
+    // 메인 > 새로고침
     navigate('/')
+    navigate(0)
   }
 
   return (

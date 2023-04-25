@@ -1,7 +1,7 @@
 import MovieItem from './MovieItem'
 import styles from './MovieList.module.scss'
 
-export default function MovieList({ movies, totalResults, isLoading }) {
+export default function MovieList({ movies = [], totalResults, isLoading }) {
   return (
     <div className={styles.result}>
       {isLoading ? (
@@ -15,12 +15,18 @@ export default function MovieList({ movies, totalResults, isLoading }) {
           }}></span>
       ) : (
         <>
-          <p className={styles.total}>{`검색결과 : 총 ${totalResults}건`}</p>
-          <ul>
-            {movies?.map(movie => {
-              return <MovieItem movie={movie} />
-            })}
-          </ul>
+          <p className={styles.total}>{`검색결과 : 총 ${
+            totalResults || 0
+          }건`}</p>
+          {movies.length !== 0 ? (
+            <ul>
+              {movies.map(movie => {
+                return <MovieItem movie={movie} />
+              })}
+            </ul>
+          ) : (
+            <div className={styles.message}>🎬 검색 결과가 없습니다.</div>
+          )}
         </>
       )}
     </div>

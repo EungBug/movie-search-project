@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getMovieDetailById } from '../MovieApi'
+import { saveMyMovie, deleteMovie, isSavedByMovieId } from '../Storage'
 import AppHeader from '~/components/AppHeader'
 import styles from './Detail.module.scss'
 
@@ -8,6 +9,13 @@ export default function Detail() {
   const params = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [movie, setMovie] = useState({})
+  const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    getMovieDetail()
+    const saved = isSavedByMovieId(params.id)
+    setSaved(saved)
+  }, [])
 
   const getMovieDetail = async () => {
     setIsLoading(true)
@@ -17,14 +25,26 @@ export default function Detail() {
     setIsLoading(false)
   }
 
-  useEffect(() => {
-    getMovieDetail()
-  }, [])
+  const onMyMoviesChecked = () => {
+    if (saved) {
+      deleteMovie(params.id)
+    } else {
+      saveMyMovie(movie)
+    }
+    setSaved(!saved)
+  }
 
   return (
     <div className={styles.detail}>
       <AppHeader />
       <div className={styles.container}>
+        <input
+          type="checkbox"
+          checked={saved}
+          onClick={onMyMoviesChecked}
+          id="my-movies"
+        />
+        <label for="my-movies"></label>
         <h1
           className={
             isLoading ? `${styles.title} ${styles.skeleton}` : styles.title
@@ -85,7 +105,6 @@ export default function Detail() {
                 {movie.Production}
               </p>
             </div>
-            {/* <div className={styles.rating}>{movie.Plot}</div> */}
           </div>
         </div>
         <div className={styles.plot}>

@@ -9,6 +9,32 @@
     border-radius: 8px;
     background-color: var(--area);
     margin: 40px 0;
+    position: relative;
+
+    input[type='checkbox'] {
+      display: none;
+    }
+
+    input[type='checkbox'] + label {
+      display: block;
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-repeat: no-repeat;
+      background-image: url('/public/my_movie_star.svg');
+      background-size: cover;
+    }
+    input[id='my-movies']:checked + label::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 80px;
+      background-repeat: no-repeat;
+      background-image: url('/public/my_movie_star_checked.svg');
+      background-size: cover;
+    }
 
     // 제목
     h1 {

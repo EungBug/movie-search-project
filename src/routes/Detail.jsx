@@ -22,13 +22,11 @@ export default function Detail() {
     // if (!movie) return
     const poster = movie.Poster?.replace('SX300', 'SX500')
     setBigPoster(poster)
-    console.log('poster', poster)
   }, [movie])
 
   const getMovieDetail = async () => {
     setIsLoading(true)
     const movie = await getMovieDetailById(params.id)
-    console.log(movie)
     setMovie(movie)
     setIsLoading(false)
   }

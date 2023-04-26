@@ -9,7 +9,6 @@ export default function AppHeader() {
 
   useEffect(() => {
     homeRef.current.addEventListener('click', goToHome)
-    console.log('location : ', location)
     if (location.pathname === '/') {
       setActiveMenu('Home')
     } else if (location.pathname === '/my-movies') {
@@ -56,7 +55,6 @@ function AppNavigation({ activeMenu }) {
 
 // NavItem
 function AppNavMenu({ isActive, menuName, onClick }) {
-  console.log(isActive)
   const menuRef = useRef(null)
   useEffect(() => {
     if (isActive) return

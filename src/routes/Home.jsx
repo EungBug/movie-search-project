@@ -78,17 +78,22 @@ export default function Home() {
         setPage(page + 1)
       }
     } else {
-      setIsLoading(false)
+      if (res.Error === 'Too many results.') {
+        errorHandler({ code: 'ERR_TOO_MANY' })
+      } else {
+        setIsLoading(false)
+      }
     }
   }
 
   const errorHandler = error => {
-    console.log(error)
     setIsLoading(false)
     if (error.code === 'ERR_NETWORK') {
       setErrorMessage(
         '🚨 네트워크 오류가 발생했습니다.\n잠시후 다시 시도해주세요!!'
       )
+    } else if (error.code === 'ERR_TOO_MANY') {
+      setErrorMessage('🤯 검색 결과가 너무 많습니다.\n자세하게 검색해주세요!!')
     } else {
       setErrorMessage(
         '❌ 알 수 없는 오류가 발생했습니다.\n잠시 후 다시 시도해주세요!!'

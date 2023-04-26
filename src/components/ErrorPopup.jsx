@@ -1,7 +1,6 @@
 import styles from './ErrorPopup.module.scss'
 
 export default function ErrorPopup({ message, confirmCb }) {
-  console.log('message : ', message)
   return (
     <div className={styles['popup']}>
       <div className={styles['popup__overlay']}></div>

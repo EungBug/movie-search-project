@@ -20,13 +20,14 @@
   .popup__content {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     position: relative;
-    width: 15%;
+    width: 20%;
     top: 0;
     background-color: var(--area);
-    padding: 40px 100px 20px;
+    padding: 40px 40px 20px;
     text-align: center;
     border-radius: 10px;
     z-index: 10;
+    line-height: 1.4;
   }
 
   p {

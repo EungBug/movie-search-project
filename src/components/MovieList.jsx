@@ -9,7 +9,7 @@ export default function MovieList({
   loadMore
 }) {
   const skeletonItems = new Array(20).fill('')
-
+  console.log('total', totalResults)
   return (
     <div className={styles.result}>
       {isLoading ? (

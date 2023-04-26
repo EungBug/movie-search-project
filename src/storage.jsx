@@ -17,6 +17,5 @@ export function getMyMovies() {
 
 export function isSavedByMovieId(movieId) {
   const myMovies = getMyMovies()
-  console.log('MY Movies >>>', myMovies)
   return myMovies.some(movie => movie.imdbID === movieId)
 }

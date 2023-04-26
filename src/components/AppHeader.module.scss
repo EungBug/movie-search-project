@@ -1,8 +1,9 @@
 /* Header */
 .header {
   padding: 40px 30px;
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 700;
+  font-family: 'EF_jejudoldam', sans-serif;
   display: flex;
   align-items: center;
   gap: 40px;
@@ -19,7 +20,7 @@
 /* Header Nav */
 .header nav {
   color: var(--white);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   flex-grow: 1;
 

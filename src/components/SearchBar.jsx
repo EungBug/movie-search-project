@@ -19,7 +19,7 @@ export default function SearchBar({
         type="text"
         value={keyword}
         onChange={e => onChange(e.target.value)}
-        placeholder="Search Movie"
+        placeholder="Search Movie..."
         onKeyDown={e => onKeydown(e)}
         ref={searchRef}
       />

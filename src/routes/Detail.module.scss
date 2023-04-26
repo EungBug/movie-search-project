@@ -7,6 +7,7 @@
     box-sizing: border-box;
     border-radius: 8px;
     background-color: var(--area);
+    margin: 40px 0;
 
     // 제목
     h1 {
@@ -16,10 +17,11 @@
       margin-bottom: 20px;
     }
 
-    // 정보
-    .labels {
+    // 개봉일
+    .released {
       color: #75c77f;
-      font-size: 22px;
+      font-size: 24px;
+      font-weight: 500;
       margin-bottom: 40px;
     }
 
@@ -27,6 +29,7 @@
     .specs {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 40px;
       margin-bottom: 40px;
 
@@ -51,6 +54,7 @@
           font-size: 20px;
           color: var(--font);
           margin-bottom: 40px;
+          line-height: 1.4;
         }
       }
     }
@@ -67,7 +71,7 @@
       p {
         font-size: 22px;
         color: var(--font);
-        line-height: 1.4;
+        line-height: 1.5;
       }
     }
   }

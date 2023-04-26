@@ -23,9 +23,7 @@ export default function Detail() {
       <AppHeader />
       <div className={styles.container}>
         <h1 className={styles.title}>{movie.Title}</h1>
-        <div className={styles.labels}>
-          {`${movie.Released} | ${movie.Country} | ${movie.Runtime}`}
-        </div>
+        <div className={styles.released}>{movie.Released}</div>
         <div className={styles.specs}>
           <div
             style={{
@@ -33,6 +31,14 @@ export default function Detail() {
             }}
             className={styles.poster}></div>
           <div className={styles.infos}>
+            <div>
+              <h4>런타임</h4>
+              <p>{movie.Runtime}</p>
+            </div>
+            <div>
+              <h4>국가</h4>
+              <p>{movie.Country}</p>
+            </div>
             <div>
               <h4>장르</h4>
               <p>{movie.Genre}</p>

@@ -9,6 +9,7 @@ export default function Detail() {
   const params = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [movie, setMovie] = useState({})
+  const [bigPoster, setBigPoster] = useState('')
   const [saved, setSaved] = useState(false)
 
   useEffect(() => {
@@ -16,6 +17,12 @@ export default function Detail() {
     const saved = isSavedByMovieId(params.id)
     setSaved(saved)
   }, [])
+
+  useEffect(() => {
+    const poster = movie.Poster?.replace('SX300', 'SX500')
+    setBigPoster(poster)
+    console.log('poster', poster)
+  }, [movie])
 
   const getMovieDetail = async () => {
     setIsLoading(true)
@@ -64,8 +71,14 @@ export default function Detail() {
             <div className={`${styles.skeleton}`}></div>
           ) : (
             <div
-              style={{ backgroundImage: `url(${movie.Poster})` }}
-              className={styles.poster}></div>
+              style={{
+                backgroundImage: `url(${bigPoster}), url('/public/no_image.png')`
+              }}
+              className={
+                bigPoster !== 'N/A'
+                  ? styles.poster
+                  : `${styles.poster} ${styles['no-image']}`
+              }></div>
           )}
 
           <div className={styles.infos}>
@@ -116,7 +129,64 @@ export default function Detail() {
             {movie.Plot}
           </p>
         </div>
+
+        <div className={styles.ratings}>
+          <h4>평점</h4>
+          {isLoading ? (
+            <div className={styles.skeleton}></div>
+          ) : (
+            <ul>
+              {movie.Ratings?.map(rating => {
+                return <RatingItem rating={rating} />
+              })}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   )
+}
+
+function RatingItem({ rating }) {
+  switch (rating.Source) {
+    case 'Internet Movie Database':
+      return (
+        <li>
+          <img
+            src="/public/icon_imdb.png"
+            alt="Internet Movie Database"
+            className={styles.imdb}
+          />
+          - <span>{rating.Value}</span>
+        </li>
+      )
+    case 'Rotten Tomatoes':
+      return (
+        <li>
+          <img
+            src="/public/icon_rotten.png"
+            alt="Rotten Tomatoes"
+            className={styles.rotten}
+          />
+          - <span>{rating.Value}</span>
+        </li>
+      )
+    case 'Metacritic':
+      return (
+        <li>
+          <img
+            src="/public/icon_metacritic.png"
+            alt="Metacritic"
+            className={styles.metacritic}
+          />
+          - <span>{rating.Value}</span>
+        </li>
+      )
+    default:
+      return (
+        <li>
+          ETC - <span>{rating.Value}</span>
+        </li>
+      )
+  }
 }

@@ -149,12 +149,8 @@ export default function Home() {
       <AppHeader />
 
       <div className={`${styles.content}`}>
-        <div className={styles.bg}></div>
-        {/* <img
-          className={styles.image}
-          src="/public/main_cinema.png"
-          alt="MovieBug"
-        /> */}
+        {isSearching ? '' : <div className={styles.bg}></div>}
+
         <SearchBar
           keyword={searchKeyword}
           onChange={changeSearchKeyword}

@@ -74,7 +74,17 @@
         flex-shrink: 0.5;
         width: 450px;
         height: calc(450px * 3 / 2);
-        background-size: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .poster.no-image {
+        border-radius: 8px;
+        background-color: var(--button-active);
+        background-image: url('/public/no_image.png');
+        background-size: 100px;
+        background-repeat: no-repeat;
+        background-position: center;
       }
 
       .skeleton {
@@ -103,6 +113,8 @@
 
     // 줄거리
     .plot {
+      margin-bottom: 40px;
+
       h4 {
         color: var(--detail-font);
         font-size: 28px;
@@ -119,6 +131,49 @@
       .skeleton {
         width: 100%;
         height: 200px;
+      }
+    }
+
+    // 평점
+    .ratings {
+      h4 {
+        color: var(--detail-font);
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .skeleton {
+        width: 50%;
+        height: 30px;
+      }
+
+      ul {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        li {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          img {
+            width: 40px;
+          }
+
+          img.imdb {
+            width: 50px;
+          }
+
+          img.rotten {
+            width: 86px;
+          }
+
+          img.metacritic {
+            width: 30px;
+          }
+        }
       }
     }
 

@@ -6,12 +6,15 @@ import styles from './Detail.module.scss'
 
 export default function Detail() {
   const params = useParams()
+  const [isLoading, setIsLoading] = useState(false)
   const [movie, setMovie] = useState({})
 
   const getMovieDetail = async () => {
+    setIsLoading(true)
     const movie = await getMovieDetailById(params.id)
     console.log(movie)
     setMovie(movie)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -22,45 +25,77 @@ export default function Detail() {
     <div className={styles.detail}>
       <AppHeader />
       <div className={styles.container}>
-        <h1 className={styles.title}>{movie.Title}</h1>
-        <div className={styles.released}>{movie.Released}</div>
+        <h1
+          className={
+            isLoading ? `${styles.title} ${styles.skeleton}` : styles.title
+          }>
+          {movie.Title}
+        </h1>
+        <div
+          className={
+            isLoading
+              ? `${styles.released} ${styles.skeleton} ${styles.sub}`
+              : styles.released
+          }>
+          {movie.Released}
+        </div>
         <div className={styles.specs}>
-          <div
-            style={{
-              backgroundImage: `url(${movie.Poster})`
-            }}
-            className={styles.poster}></div>
+          {isLoading ? (
+            <div className={`${styles.skeleton}`}></div>
+          ) : (
+            <div
+              style={{ backgroundImage: `url(${movie.Poster})` }}
+              className={styles.poster}></div>
+          )}
+
           <div className={styles.infos}>
             <div>
               <h4>런타임</h4>
-              <p>{movie.Runtime}</p>
+              <p className={isLoading ? styles['skeleton-description'] : ''}>
+                {movie.Runtime}
+              </p>
             </div>
             <div>
               <h4>국가</h4>
-              <p>{movie.Country}</p>
+              <p className={isLoading ? styles['skeleton-description'] : ''}>
+                {movie.Country}
+              </p>
             </div>
             <div>
               <h4>장르</h4>
-              <p>{movie.Genre}</p>
+              <p className={isLoading ? styles['skeleton-description'] : ''}>
+                {movie.Genre}
+              </p>
             </div>
             <div>
               <h4>감독</h4>
-              <p>{movie.Director}</p>
+              <p className={isLoading ? styles['skeleton-description'] : ''}>
+                {movie.Director}
+              </p>
             </div>
             <div>
               <h4>출연자</h4>
-              <p>{movie.Actors}</p>
+              <p className={isLoading ? styles['skeleton-description'] : ''}>
+                {movie.Actors}
+              </p>
             </div>
             <div>
               <h4>제작사</h4>
-              <p>{movie.Production}</p>
+              <p className={isLoading ? styles['skeleton-description'] : ''}>
+                {movie.Production}
+              </p>
             </div>
             {/* <div className={styles.rating}>{movie.Plot}</div> */}
           </div>
         </div>
         <div className={styles.plot}>
           <h4>줄거리</h4>
-          <p>{movie.Plot}</p>
+          <p
+            className={
+              isLoading ? `${styles.plottext} ${styles.skeleton}` : ''
+            }>
+            {movie.Plot}
+          </p>
         </div>
       </div>
     </div>

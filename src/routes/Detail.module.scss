@@ -1,6 +1,7 @@
 .detail {
   max-width: 1200px;
   margin: 0 auto;
+  line-height: 1.4;
 
   .container {
     padding: 40px;
@@ -17,6 +18,11 @@
       margin-bottom: 20px;
     }
 
+    h1.skeleton {
+      width: 80%;
+      height: 46px;
+    }
+
     // 개봉일
     .released {
       color: #75c77f;
@@ -25,23 +31,33 @@
       margin-bottom: 40px;
     }
 
+    .released.skeleton {
+      width: 300px;
+      height: 36px;
+    }
+
     // 스펙
     .specs {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      // flex-wrap: wrap;
+      justify-content: space-between;
       gap: 40px;
       margin-bottom: 40px;
 
       .poster {
-        flex-shrink: 0;
-        width: 400px;
-        height: calc(400px * 3 / 2);
+        flex-shrink: 0.5;
+        width: 450px;
+        height: calc(450px * 3 / 2);
         background-size: cover;
       }
 
+      .skeleton {
+        width: 450px;
+        height: calc(450px * 3 / 2);
+      }
+
       .infos {
-        flex-grow: 1;
+        min-width: 600px;
 
         h4 {
           font-size: 24px;
@@ -73,6 +89,47 @@
         color: var(--font);
         line-height: 1.5;
       }
+
+      .skeleton {
+        width: 100%;
+        height: 200px;
+      }
     }
+
+    .skeleton {
+      background: linear-gradient(
+        120deg,
+        #2f2c44 30%,
+        #4c4867 36%,
+        #4c4867 40%,
+        #2f2c44 48%
+      );
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      animation: load 1s infinite;
+      border-radius: 8px;
+    }
+
+    .skeleton-description {
+      background: linear-gradient(
+        120deg,
+        #3f3b5b 30%,
+        #595478 36%,
+        #595478 40%,
+        #3f3b5b 48%
+      );
+      width: 60%;
+      height: 32px;
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      animation: load 1s infinite;
+      border-radius: 8px;
+    }
+  }
+}
+
+@keyframes load {
+  100% {
+    background-position: -100% 0;
   }
 }

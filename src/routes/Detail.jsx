@@ -19,6 +19,7 @@ export default function Detail() {
   }, [])
 
   useEffect(() => {
+    // if (!movie) return
     const poster = movie.Poster?.replace('SX300', 'SX500')
     setBigPoster(poster)
     console.log('poster', poster)
@@ -72,7 +73,7 @@ export default function Detail() {
           ) : (
             <div
               style={{
-                backgroundImage: `url(${bigPoster}), url('/public/no_image.png')`
+                backgroundImage: `url(${bigPoster})`
               }}
               className={
                 bigPoster !== 'N/A'

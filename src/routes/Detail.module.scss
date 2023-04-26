@@ -74,14 +74,14 @@
         flex-shrink: 0.5;
         width: 450px;
         height: calc(450px * 3 / 2);
-        background-size: contain;
+        background-size: 450px calc(450px * 3 / 2);
         background-repeat: no-repeat;
+        border-radius: 8px;
       }
 
       .poster.no-image {
-        border-radius: 8px;
         background-color: var(--button-active);
-        background-image: url('/public/no_image.png');
+        background-image: url('/public/no_image.png') !important;
         background-size: 100px;
         background-repeat: no-repeat;
         background-position: center;

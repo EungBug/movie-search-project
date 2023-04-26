@@ -35,5 +35,14 @@
       color: var(--hover);
       text-shadow: 2px 2px 4px rgba($color: #fff, $alpha: 0.4);
     }
+
+    li.active {
+      color: var(--main);
+    }
+
+    li.active:hover {
+      color: var(--main);
+      text-shadow: none;
+    }
   }
 }

@@ -47,10 +47,10 @@ export default function Detail() {
         <input
           type="checkbox"
           checked={saved}
-          onClick={onMyMoviesChecked}
+          onChange={onMyMoviesChecked}
           id="my-movies"
         />
-        <label for="my-movies"></label>
+        <label htmlFor="my-movies"></label>
         <h1
           className={
             isLoading ? `${styles.title} ${styles.skeleton}` : styles.title
@@ -135,8 +135,13 @@ export default function Detail() {
             <div className={styles.skeleton}></div>
           ) : (
             <ul>
-              {movie.Ratings?.map(rating => {
-                return <RatingItem rating={rating} />
+              {movie.Ratings?.map((rating, index) => {
+                return (
+                  <RatingItem
+                    rating={rating}
+                    key={index}
+                  />
+                )
               })}
             </ul>
           )}

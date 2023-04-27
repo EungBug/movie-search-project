@@ -1,14 +1,15 @@
 import { useRef, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import styles from './MovieItem.module.scss'
 
 export default function MovieItem({ movie }) {
   const itemRef = useRef(null)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    itemRef.current.addEventListener('click', goToMovieDetail)
-  }, [])
+  // NavLink로 대체
+  // useEffect(() => {
+  //   itemRef.current.addEventListener('click', goToMovieDetail)
+  // }, [])
 
   const goToMovieDetail = () => {
     navigate(`/movies/${movie.imdbID}`)
@@ -20,20 +21,20 @@ export default function MovieItem({ movie }) {
   }
 
   return (
-    <li
-      key={movie.imdbID}
-      ref={itemRef}>
-      <div className={styles['movie-item']}>
-        <img
-          src={movie.Poster}
-          alt={movie.Title}
-          onError={imageErrorHandler}
-        />
-        <div className={styles['text-group']}>
-          <p className={styles.year}>{movie.Year}</p>
-          <p className={styles.title}>{movie.Title}</p>
+    <li ref={itemRef}>
+      <NavLink to={`/movies/${movie.imdbID}`}>
+        <div className={styles['movie-item']}>
+          <img
+            src={movie.Poster}
+            alt={movie.Title}
+            onError={imageErrorHandler}
+          />
+          <div className={styles['text-group']}>
+            <p className={styles.year}>{movie.Year}</p>
+            <p className={styles.title}>{movie.Title}</p>
+          </div>
         </div>
-      </div>
+      </NavLink>
     </li>
   )
 }

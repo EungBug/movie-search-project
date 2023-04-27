@@ -34,7 +34,6 @@ export default function AppHeader() {
 
 // Nav
 function AppNavigation({ activeMenu }) {
-  console.log(activeMenu)
   const navigate = useNavigate()
   function goToMyMovies() {
     navigate('/my-movies')

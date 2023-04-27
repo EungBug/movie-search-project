@@ -9,7 +9,7 @@ export default function MovieList({
   loadMore
 }) {
   const skeletonItems = new Array(20).fill('')
-  console.log('total', totalResults)
+
   return (
     <div className={styles.result}>
       {isLoading ? (
@@ -28,8 +28,13 @@ export default function MovieList({
           }건`}</p>
           {movies.length !== 0 ? (
             <ul>
-              {movies?.map(movie => {
-                return <MovieItem movie={movie} />
+              {movies?.map((movie, index) => {
+                return (
+                  <MovieItem
+                    key={index}
+                    movie={movie}
+                  />
+                )
               })}
 
               {loadMore

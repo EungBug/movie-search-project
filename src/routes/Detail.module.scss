@@ -71,7 +71,7 @@
       margin-bottom: 40px;
 
       .poster {
-        flex-shrink: 0.5;
+        flex-shrink: 0;
         width: 450px;
         height: calc(450px * 3 / 2);
         background-size: 450px calc(450px * 3 / 2);

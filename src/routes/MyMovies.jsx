@@ -14,8 +14,13 @@ export default function MyMovies() {
     <div className="my-movies">
       <AppHeader />
       <ul className="movie-list">
-        {myMovies?.map(movie => {
-          return <MovieItem movie={movie} />
+        {myMovies?.map((movie, index) => {
+          return (
+            <MovieItem
+              key={index}
+              movie={movie}
+            />
+          )
         })}
       </ul>
     </div>

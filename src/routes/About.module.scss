@@ -1,0 +1,57 @@
+.about {
+  max-width: 1200px;
+  margin: 0 auto;
+  line-height: 1.4;
+
+  .container {
+    padding: 40px;
+    margin: 40px 0;
+    position: relative;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+
+    .me {
+      .profile {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        margin-bottom: 40px;
+        background-size: 300px 300px;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: 0.5s ease-in-out;
+      }
+
+      .profile:hover {
+        background-size: 400px 400px;
+      }
+
+      .name {
+        font-size: 40px;
+        text-align: center;
+      }
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      font-size: 20px;
+
+      a {
+        transition: 0.4s;
+      }
+      a:hover {
+        color: var(--hover);
+      }
+
+      a img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 4px;
+      }
+    }
+  }
+}

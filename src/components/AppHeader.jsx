@@ -13,6 +13,8 @@ export default function AppHeader() {
       setActiveMenu('Home')
     } else if (location.pathname === '/my-movies') {
       setActiveMenu('MyMovies')
+    } else if (location.pathname === '/about') {
+      setActiveMenu('About')
     }
   }, [])
 
@@ -39,13 +41,24 @@ function AppNavigation({ activeMenu }) {
     navigate('/my-movies')
   }
 
+  function goToAbout() {
+    navigate('/about')
+  }
+
   return (
     <nav>
       <ul>
         <AppNavMenu
+          key={'My Movies'}
           isActive={activeMenu === 'MyMovies'}
           menuName="My Movies"
           onClick={goToMyMovies}
+        />
+        <AppNavMenu
+          key={'About'}
+          isActive={activeMenu === 'About'}
+          menuName="About"
+          onClick={goToAbout}
         />
       </ul>
     </nav>

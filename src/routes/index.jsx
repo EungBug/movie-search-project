@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Home from './Home'
 import MyMovies from './MyMovies'
 import Detail from './Detail'
+import About from './About'
 
 export default createBrowserRouter([
   {
@@ -15,5 +16,9 @@ export default createBrowserRouter([
   {
     path: '/my-movies',
     element: <MyMovies />
+  },
+  {
+    path: '/about',
+    element: <About />
   }
 ])

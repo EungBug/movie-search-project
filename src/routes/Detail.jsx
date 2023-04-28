@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getMovieDetailById } from '../MovieApi'
+import { getMovieDetailById } from '../movieApi'
 import { saveMyMovie, deleteMovie, isSavedByMovieId } from '../Storage'
 import AppHeader from '~/components/AppHeader'
 import styles from './Detail.module.scss'
@@ -19,7 +19,6 @@ export default function Detail() {
   }, [])
 
   useEffect(() => {
-    // if (!movie) return
     const poster = movie.Poster?.replace('SX300', 'SX500')
     setBigPoster(poster)
   }, [movie])

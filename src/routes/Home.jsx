@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { searchByMovie } from '~/MovieApi'
+import { searchByMovie } from '~/movieApi'
 import AppHeader from '~/components/AppHeader'
 import SearchBar from '~/components/SearchBar'
 import MovieList from '~/components/MovieList'
@@ -8,6 +8,7 @@ import ErrorPopup from '../components/ErrorPopup'
 import styles from './Home.module.scss'
 
 export default function Home() {
+  const [year, setYear] = useState('')
   const [searchKeyword, setSearchKeyword] = useState('')
   const [movies, setMovies] = useState([])
   const [page, setPage] = useState(1)
@@ -52,7 +53,7 @@ export default function Home() {
       setIsLoading(true)
     }
 
-    const res = await searchByMovie(searchKeyword, page, errorHandler)
+    const res = await searchByMovie(searchKeyword, page, year, errorHandler)
     console.log(res)
     if (res.Response === 'True') {
       if (res.Search) {
@@ -127,6 +128,11 @@ export default function Home() {
     }
   }
 
+  const yearSelectedHandler = event => {
+    const selectedYear = event.target.value === 'All' ? '' : event.target.value
+    setYear(selectedYear)
+  }
+
   const obsHandler = entries => {
     const target = entries[0]
     //옵저버 중복 실행 방지를 위한 Flag들
@@ -162,6 +168,7 @@ export default function Home() {
           onSearchClick={searchButtonClick}
           isSearching={isSearching}
           onKeydown={enterKeydownHandler}
+          onYearSelected={yearSelectedHandler}
         />
 
         {isSearching && movies && !isError ? (

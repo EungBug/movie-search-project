@@ -6,15 +6,39 @@ export default function SearchBar({
   onChange,
   onKeydown,
   onSearchClick,
+  onYearSelected,
   isSearching
 }) {
   const searchRef = useRef(null)
+  const yearList = ['All']
+  const thisYear = new Date().getFullYear()
+  for (let year = Number(thisYear); year >= 1980; year--) {
+    yearList.push(year)
+  }
 
   return (
     <div
       className={`${styles['search-bar']} ${
         isSearching ? styles.searching : ''
       }`}>
+      {isSearching ? (
+        ''
+      ) : (
+        <select
+          name="year"
+          onChange={onYearSelected}>
+          {yearList.map(year => {
+            return (
+              <option
+                value={year}
+                key={year}>
+                {year}
+              </option>
+            )
+          })}
+        </select>
+      )}
+
       <input
         type="text"
         value={keyword}

@@ -10,6 +10,24 @@
   transform: translate(-50%, -50%);
   font-family: 'GongGothicMedium', sans-serif;
 
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('~/assets/expand_more.svg');
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    background-position-y: 50%;
+    background-size: 28px 28px;
+    outline: none;
+    border: none;
+    font-size: 24px;
+    color: var(--font);
+    padding: 0 44px 0 20px;
+    height: 56px;
+    border-radius: 8px;
+    background-color: var(--secondary);
+  }
+
   input {
     all: unset;
     outline: none;

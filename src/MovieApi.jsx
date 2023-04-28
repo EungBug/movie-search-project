@@ -3,7 +3,7 @@ import axios from 'axios'
 const BASE_URL = 'https://omdbapi.com'
 const APIKEY = '7035c60c'
 
-export async function searchByMovie(keyword, page, errorCb) {
+export async function searchByMovie(keyword, page, year, errorCb) {
   try {
     const res = await axios({
       url: BASE_URL,
@@ -11,7 +11,8 @@ export async function searchByMovie(keyword, page, errorCb) {
       params: {
         apikey: APIKEY,
         s: keyword,
-        page: page
+        page: page,
+        y: year
       }
     })
 

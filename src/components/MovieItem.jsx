@@ -21,7 +21,9 @@ export default function MovieItem({ movie }) {
   }
 
   return (
-    <li ref={itemRef}>
+    <li
+      ref={itemRef}
+      className={styles.container}>
       <NavLink to={`/movies/${movie.imdbID}`}>
         <div className={styles['movie-item']}>
           <img

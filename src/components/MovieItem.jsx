@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import styles from './MovieItem.module.scss'
+import noImage from '/public/no_image.png'
 
 export default function MovieItem({ movie }) {
   const itemRef = useRef(null)
@@ -35,7 +36,7 @@ export default function MovieItem({ movie }) {
             style={
               movie.Poster !== 'N/A'
                 ? { backgroundImage: `url(${movie.Poster})` }
-                : { backgroundImage: `url(/public/no_image.png)` }
+                : { backgroundImage: `url(${noImage})` }
             }></div>
           <div className={styles['text-group']}>
             <p className={styles.year}>{movie.Year}</p>

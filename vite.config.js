@@ -6,5 +6,10 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [{ find: '~', replacement: `${__dirname}/src` }]
+  },
+  build: {
+    rollupOptions: {
+      external: 'NonExistingPath'
+    }
   }
 })

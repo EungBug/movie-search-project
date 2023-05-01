@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { searchByMovie } from '/src/movieApi'
+import { searchByMovie } from '~/movieApi'
 import AppHeader from '~/components/AppHeader'
 import SearchBar from '~/components/SearchBar'
 import MovieList from '~/components/MovieList'

@@ -13,16 +13,22 @@ export default function MyMovies() {
   return (
     <div className="my-movies">
       <AppHeader />
-      <ul className="movie-list">
-        {myMovies?.map((movie, index) => {
-          return (
-            <MovieItem
-              key={index}
-              movie={movie}
-            />
-          )
-        })}
-      </ul>
+      {myMovies.length !== 0 ? (
+        <ul className="movie-list">
+          {myMovies?.map((movie, index) => {
+            return (
+              <MovieItem
+                key={index}
+                movie={movie}
+              />
+            )
+          })}
+        </ul>
+      ) : (
+        <p style={{ textAlign: 'center', marginTop: '150px' }}>
+          My Movies 목록이 비었습니다.
+        </p>
+      )}
     </div>
   )
 }

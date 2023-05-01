@@ -4,6 +4,9 @@ import { getMovieDetailById } from '~/api'
 import { saveMyMovie, deleteMovie, isSavedByMovieId } from '../storage'
 import AppHeader from '~/components/AppHeader'
 import styles from './Detail.module.scss'
+import imdbIcon from '/public/icon_imdb.png'
+import rottenIcon from '/public/icon_rotten.png'
+import metacriticIcon from '/public/icon_metacritic.png'
 
 export default function Detail() {
   const params = useParams()
@@ -156,7 +159,7 @@ function RatingItem({ rating }) {
       return (
         <li>
           <img
-            src="/public/icon_imdb.png"
+            src={imdbIcon}
             alt="Internet Movie Database"
             className={styles.imdb}
           />
@@ -167,7 +170,7 @@ function RatingItem({ rating }) {
       return (
         <li>
           <img
-            src="/public/icon_rotten.png"
+            src={rottenIcon}
             alt="Rotten Tomatoes"
             className={styles.rotten}
           />
@@ -178,7 +181,7 @@ function RatingItem({ rating }) {
       return (
         <li>
           <img
-            src="/public/icon_metacritic.png"
+            src={metacriticIcon}
             alt="Metacritic"
             className={styles.metacritic}
           />

@@ -43,17 +43,20 @@ img {
 }
 
 .my-movies ul.movie-list {
-  width: 100%;
-  padding: 40px 20px;
-  margin: 40px 0;
+  min-width: 460px;
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: minmax(200px, 1fr) repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    );
   gap: 20px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   justify-items: center;
-  background-color: var(--area);
   border-radius: 8px;
+  background-color: var(--area);
+  padding: 20px;
 }
 
 @font-face {

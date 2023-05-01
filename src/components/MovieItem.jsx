@@ -6,11 +6,6 @@ export default function MovieItem({ movie }) {
   const itemRef = useRef(null)
   const navigate = useNavigate()
 
-  // NavLink로 대체
-  // useEffect(() => {
-  //   itemRef.current.addEventListener('click', goToMovieDetail)
-  // }, [])
-
   const goToMovieDetail = () => {
     navigate(`/movies/${movie.imdbID}`)
   }
@@ -26,11 +21,22 @@ export default function MovieItem({ movie }) {
       className={styles.container}>
       <NavLink to={`/movies/${movie.imdbID}`}>
         <div className={styles['movie-item']}>
-          <img
+          {/* <img
             src={movie.Poster}
             alt={movie.Title}
             onError={imageErrorHandler}
-          />
+          /> */}
+          <div
+            className={
+              movie.Poster !== 'N/A'
+                ? styles.poster
+                : `${styles['poster']} ${styles['no-image']}`
+            }
+            style={
+              movie.Poster !== 'N/A'
+                ? { backgroundImage: `url(${movie.Poster})` }
+                : { backgroundImage: `url(/public/no_image.png)` }
+            }></div>
           <div className={styles['text-group']}>
             <p className={styles.year}>{movie.Year}</p>
             <p className={styles.title}>{movie.Title}</p>

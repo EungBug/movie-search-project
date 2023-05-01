@@ -9,6 +9,8 @@
   }
 
   ul {
+    min-width: 460px;
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(200px, 1fr) repeat(
         auto-fill,

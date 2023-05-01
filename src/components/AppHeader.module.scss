@@ -37,11 +37,11 @@
       text-shadow: 2px 2px 4px rgba($color: #fff, $alpha: 0.4);
     }
 
-    li.active {
+    .active {
       color: var(--main);
     }
 
-    li.active:hover {
+    .active:hover {
       color: var(--main);
       text-shadow: none;
     }

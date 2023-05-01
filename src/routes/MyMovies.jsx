@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import AppHeader from '~/components/AppHeader'
-import { getMyMovies } from '../Storage'
+import { getMyMovies } from '../storage'
 import MovieItem from '../components/MovieItem'
 
 export default function MyMovies() {

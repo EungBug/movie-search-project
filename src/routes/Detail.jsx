@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getMovieDetailById } from '../movieApi'
-import { saveMyMovie, deleteMovie, isSavedByMovieId } from '../Storage'
+import { saveMyMovie, deleteMovie, isSavedByMovieId } from '../storage'
 import AppHeader from '~/components/AppHeader'
 import styles from './Detail.module.scss'
 

@@ -1,20 +1,10 @@
-import { useRef, useEffect } from 'react'
-import { useNavigate, NavLink } from 'react-router-dom'
+import { useRef } from 'react'
+import { NavLink } from 'react-router-dom'
 import styles from './MovieItem.module.scss'
-import noImage from '/public/no_image.png'
+import noImage from '/no_image.png'
 
 export default function MovieItem({ movie }) {
   const itemRef = useRef(null)
-  const navigate = useNavigate()
-
-  const goToMovieDetail = () => {
-    navigate(`/movies/${movie.imdbID}`)
-  }
-
-  const imageErrorHandler = event => {
-    event.target.className = styles['no-image']
-    event.target.src = '/no_image.png'
-  }
 
   return (
     <li
@@ -22,11 +12,6 @@ export default function MovieItem({ movie }) {
       className={styles.container}>
       <NavLink to={`/movies/${movie.imdbID}`}>
         <div className={styles['movie-item']}>
-          {/* <img
-            src={movie.Poster}
-            alt={movie.Title}
-            onError={imageErrorHandler}
-          /> */}
           <div
             className={
               movie.Poster !== 'N/A'
